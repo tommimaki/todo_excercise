@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Tasklist</title>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+</head>
+<body>
+	<h1>Tasklist</h1>
+
+
+	<form th:action="@{/logout}" method="post">
+	<input type="submit" value="log out"/>
+	</form>
+	
+	<div>
+	<h3 th:inline="text"> welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	
+	
+
+		<table>
+		<tbody>
+		<tr th:each = "task : ${tasks}">
+		<td th:text="${task.taskName}"> </td>
+		<td> - </td>
+		<td th:text="${task.taskCreator}"> </td>
+		<td th:text="${task.category.name}"> </td>
+	
+		<td sec:authorize="hasAuthority('ADMIN')"> <a th:href="@{/delete/{id}(id=${task.id})}">Delete</a> </td>
+		</tr>
+		
+		
+		</tbody>
+		</table>
+		
+		<a href="/add"> Lisää uusi task </a>
+
+</body>
+
+</html>
