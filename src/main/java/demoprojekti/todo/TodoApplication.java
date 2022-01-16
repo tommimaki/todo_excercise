@@ -29,20 +29,7 @@ public class TodoApplication {
 	public CommandLineRunner demo(TaskRepository repository, CategoryRepository crepository, UserRepository urepository) {
 		return (args) -> {
 
-			// Create users: admin/admin user/user
-			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
-			User user2 = new User("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
-			urepository.save(user1);
-			urepository.save(user2);
-
-			Category Cat1 = new Category("koulu");
-			crepository.save(Cat1);
-			Category Cat2 = new Category("koti");
-			crepository.save(Cat2);
-
-			repository.save(new Task("Tee ruokaa", "Tommi", Cat1));
-			repository.save(new Task("Tee läksyt", "Tommi", Cat2));
-			repository.save(new Task("Tee ruokaa", "Tommi", Cat1));
+		
 
 			log.info("fetch all tasks");
 			for (Task task : repository.findAll()) {

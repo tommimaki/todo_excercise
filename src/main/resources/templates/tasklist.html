@@ -3,6 +3,7 @@
 <head>
 <title>Tasklist</title>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
 	<h1>Tasklist</h1>
@@ -26,14 +27,14 @@
 		<td th:text="${task.taskCreator}"> </td>
 		<td th:text="${task.category.name}"> </td>
 	
-		<td sec:authorize="hasAuthority('ADMIN')"> <a th:href="@{/delete/{id}(id=${task.id})}">Delete</a> </td>
+		<td sec:authorize="hasAuthority('ADMIN')"> <a class="btn btn-danger" th:href="@{/delete/{id}(id=${task.id})}">Delete</a> </td>
 		</tr>
 		
 		
 		</tbody>
 		</table>
 		
-		<a href="/add"> Lisää uusi task </a>
+		<a class="btn btn-success" href="/add" > Lisää uusi task </a>
 
 </body>
 
