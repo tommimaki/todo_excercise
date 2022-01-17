@@ -14,8 +14,11 @@
 			<input type="submit" value="Log In" class="btn btn-sm "/>
 		</form>
 	</div>
-
-	<form sec:authorize="hasAuthority('ADMIN', 'user')" th:action="@{/logout}" method="post">
+	<form sec:authorize="hasAuthority('user')" th:action="@{/logout}" method="post">
+	<input type="submit" value="log out"/>
+	</form>
+	
+	<form sec:authorize="hasAuthority('ADMIN')" th:action="@{/logout}" method="post">
 	<input type="submit" value="log out"/>
 	</form>
 	
@@ -45,7 +48,8 @@
 		</tbody>
 		</table>
 		
-		<a class="btn btn-success" href="/add" > add new task </a>
+		<a class="btn btn-success" sec:authorize="hasAuthority('ADMIN')" href="/add" > add new task </a>
+		<a class="btn btn-success" sec:authorize="hasAuthority('user')" href="/add" > add new task </a>
 		<a class="btn btn-success" sec:authorize="hasAuthority('ADMIN')" href="/categorylist" > manage categories </a>
 		
 
