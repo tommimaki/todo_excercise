@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        .authorizeRequests().antMatchers("/login").authenticated()
 	        .and()
 	      .formLogin()
-	          .defaultSuccessUrl("/login")
+	          .defaultSuccessUrl("/tasklist")
 	          .permitAll()
 	          .and()
 	      .logout()
