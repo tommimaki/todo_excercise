@@ -8,8 +8,14 @@
 <body>
 	<h1>Tasklist</h1>
 
+	<div sec:authorize="isAnonymous()"> 
+		<h3 th:inline="text">Not signed in</h3>
+		<form th:action="@{/login}" method="get">
+			<input type="submit" value="Log In" class="btn btn-sm "/>
+		</form>
+	</div>
 
-	<form th:action="@{/logout}" method="post">
+	<form sec:authorize="hasAuthority('ADMIN', 'user')" th:action="@{/logout}" method="post">
 	<input type="submit" value="log out"/>
 	</form>
 	
@@ -23,7 +29,7 @@
 		<thead>
 		<tr>
 		<th> Task </th>
-		<th> who is the task for </th>
+		<th> Creator </th>
 		<th> Task category </th>
 		
 		<tbody>

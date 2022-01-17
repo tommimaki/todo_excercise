@@ -42,7 +42,7 @@ public class TodoApplication {
 
 						repository.save(new Task("Tee ruokaa", "Tommi", Cat1));
 						repository.save(new Task("Tee läksyt", "Tommi", Cat2));
-						repository.save(new Task("Tee ruokaa", "Tommi", Cat1));
+				
 
 			log.info("fetch all tasks");
 			for (Task task : repository.findAll()) {
