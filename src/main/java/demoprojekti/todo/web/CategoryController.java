@@ -57,19 +57,19 @@ public class CategoryController {
         return "redirect:../categorylist";
     }     
 	
-	// RESTful service to get all category
+	// RESTful allcats
     @RequestMapping(value="/categories", method = RequestMethod.GET)
     public @ResponseBody List<Category> getCategoriesRest() {	
         return (List<Category>) repository.findAll();
     }    
 
-	// RESTful service to get category by id
+	// REST byid
     @RequestMapping(value="/categories/{id}", method = RequestMethod.GET)
     public @ResponseBody Optional<Category> findCategoriesRest(@PathVariable("id") Long cId) {	
     	return repository.findById(cId);
     } 
     
-    // RESTful service to save new category
+    // RESTful save
     @RequestMapping(value="/categories", method = RequestMethod.POST)
     public @ResponseBody Category saveCatRest(@RequestBody Category category) {	
     	return repository.save(category);
