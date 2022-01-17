@@ -30,8 +30,8 @@ public class TodoApplication {
 		return (args) -> {
 
 			// Create users: admin1/admin1 user2/user2
-						User user1 = new User("user10", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "user");
-						User user2 = new User("admin10", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
+						User user1 = new User("user11", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "user");
+						User user2 = new User("admin11", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
 						urepository.save(user1);
 						urepository.save(user2);
 
