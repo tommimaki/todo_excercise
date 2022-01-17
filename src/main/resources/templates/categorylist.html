@@ -27,7 +27,7 @@
 		
 		
 	
-		<td sec:authorize="hasAuthority('ADMIN')"> <a class="btn btn-danger" th:href="@{/catdelete/{id}(id=${category.categoryid})}">Delete</a> </td>
+		<td sec:authorize="hasAuthority('ADMIN')"> <a class="btn btn-danger" th:href="@{/deletecategory/{id}(id=${category.categoryid})}">Delete</a> </td>
 		</tr>
 		
 		
