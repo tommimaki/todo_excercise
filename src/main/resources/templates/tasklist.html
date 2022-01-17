@@ -39,7 +39,7 @@
 		</tbody>
 		</table>
 		
-		<a class="btn btn-success" href="/add" > add new task </a>
+		<a class="btn btn-success" sec:authorize="hasAuthority('ADMIN')" href="/add" > add new task </a>
 		<a class="btn btn-success" sec:authorize="hasAuthority('ADMIN')" href="/categorylist" > manage categories </a>
 		
 
