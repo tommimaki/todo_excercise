@@ -19,11 +19,16 @@
 	
 	
 
-		<table>
+		<table class="table table-striped" >
+		<thead>
+		<tr>
+		<th> Task </th>
+		<th> who is the task for </th>
+		<th> Task category </th>
+		
 		<tbody>
 		<tr th:each = "task : ${tasks}">
 		<td th:text="${task.taskName}"> </td>
-		<td> - </td>
 		<td th:text="${task.taskCreator}"> </td>
 		<td th:text="${task.category.name}"> </td>
 	
@@ -34,7 +39,9 @@
 		</tbody>
 		</table>
 		
-		<a class="btn btn-success" href="/add" > Lisää uusi task </a>
+		<a class="btn btn-success" href="/add" > add new task </a>
+		<a class="btn btn-success" sec:authorize="hasAuthority('ADMIN')" href="/categorylist" > manage categories </a>
+		
 
 </body>
 

@@ -53,27 +53,26 @@ public class TaskController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String deleteStudent(@PathVariable("id") Long taskId, Model model) {
+    public String deleteTask(@PathVariable("id") Long taskId, Model model) {
     	repository.deleteById(taskId);
         return "redirect:../tasklist";
     }     
 	
 	
-	// RESTful service to get all students
-    // Java-kielinen Student-luokan oliolista muunnetaan JSON-opiskelijalistaksi ja 
-    // lähetetään web-selaimelle vastauksena
+    //rest
+	
     @RequestMapping(value="/tasks", method = RequestMethod.GET)
-    public @ResponseBody List<Task> studentListRest() {	
+    public @ResponseBody List<Task> TaskListRest() {	
         return (List<Task>) repository.findAll();
     }    
 
-	// RESTful service to get student by id
+
     @RequestMapping(value="/tasks/{id}", method = RequestMethod.GET)
-    public @ResponseBody Optional<Task> findStudentRest(@PathVariable("id") Long taskId) {	
+    public @ResponseBody Optional<Task> findTaskRest(@PathVariable("id") Long taskId) {	
     	return repository.findById(taskId);
     }      
     
-    // RESTful service to save new student
+   
     @RequestMapping(value="/tasks", method = RequestMethod.POST)
     public @ResponseBody Task saveTaskRest(@RequestBody Task task) {	
     	return repository.save(task);

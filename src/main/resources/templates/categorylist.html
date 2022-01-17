@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Tasklist</title>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>categories</h1>
+
+
+	<form th:action="@{/logout}" method="post">
+	<input type="submit" value="log out"/>
+	</form>
+	
+
+
+		<table class="table table-striped" >
+		<thead>
+		<tr>
+		<th> Categories </th>
+
+		
+		<tbody>
+		<tr th:each = "category : ${categories}">
+		<td th:text="${category.name}"> </td>
+		
+		
+	
+		<td sec:authorize="hasAuthority('ADMIN')"> <a class="btn btn-danger" th:href="@{/catdelete/{id}(id=${category.categoryid})}">Delete</a> </td>
+		</tr>
+		
+		
+		</tbody>
+		</table>
+		<a class="btn btn-success" href="/addcategory" > add category </a>
+		<a class="btn btn-success" href="/tasklist" > Return To Tasklist </a>
+		
+		
+
+</body>
+
+</html>

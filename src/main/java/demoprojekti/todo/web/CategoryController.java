@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,12 +19,43 @@ import demoprojekti.todo.domain.CategoryRepository;
 
 
 
+
 @CrossOrigin
 @Controller
 public class CategoryController {
 	
 	@Autowired
 	private CategoryRepository repository;
+	 
+    
+	//lista
+	@RequestMapping(value = "/categorylist", method = RequestMethod.GET )
+	public String categoryList(Model model) {
+		model.addAttribute("categories", repository.findAll());
+		return "categorylist";
+	}
+	
+	//lisää
+	@RequestMapping(value = "/addcategory")
+	public String addTask(Model model) {
+		model.addAttribute("category", new Category() );
+		return "addcategory";
+	}
+	
+	//tallenna
+	@RequestMapping(value = "/savecategory", method = RequestMethod.POST)
+	public String save(Category category) {
+		repository.save(category);
+		return "redirect:categorylist";
+	}
+	
+	//poisto
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@RequestMapping(value = "/deletegategory/{id}", method = RequestMethod.GET)
+    public String deleteCategory(@PathVariable("id") Long categoryid, Model model) {
+    	repository.deleteById(categoryid);
+        return "redirect:../categorylist";
+    }     
 	
 	// RESTful service to get all category
     @RequestMapping(value="/categories", method = RequestMethod.GET)
@@ -38,7 +71,7 @@ public class CategoryController {
     
     // RESTful service to save new category
     @RequestMapping(value="/categories", method = RequestMethod.POST)
-    public @ResponseBody Category saveStudentRest(@RequestBody Category category) {	
+    public @ResponseBody Category saveCatRest(@RequestBody Category category) {	
     	return repository.save(category);
     }
 

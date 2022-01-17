@@ -30,52 +30,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserDetailServiceImpl userDetailsService; 
 
 	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		
-		http
-		.authorizeRequests().antMatchers("/css/**","/signup").permitAll() 
-		.and()
-		.authorizeRequests().anyRequest().authenticated()
-		.and()
-		.formLogin()
-		
-		.defaultSuccessUrl("/tasklist")
-		.permitAll()
-		.and()
-		.logout()
-		.permitAll();
+	 @Override
+	    protected void configure(HttpSecurity http) throws Exception {
+	        http
+	        .authorizeRequests().antMatchers("/css/**").permitAll() // Enable css when logged out
+	        .and()
+	        .authorizeRequests().antMatchers("/h2-console/**").permitAll()
+	        .and()
+	        .csrf().ignoringAntMatchers("/h2-console/**")
+	        .and()
+	        .headers().frameOptions().sameOrigin()
+	        .and()
+	        .authorizeRequests().antMatchers("/login").authenticated()
+	        .and()
+	      .formLogin()
+	          .defaultSuccessUrl("/tasklist")
+	          .permitAll()
+	          .and()
+	      .logout()
+	          .permitAll();
+	    }
 	
-	}
-	
-	
-/*    @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-    	
-        List<UserDetails> users = new ArrayList();
 
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
-        UserDetails user = User
-        		.withUsername("user")
-        		.password(passwordEncoder.encode("user"))
-        		.roles("USER")
-        		.build();
-
-        users.add(user);
-
-        user = User
-        		.withUsername("admin")
-        		.password(passwordEncoder.encode("admin"))
-        		.roles("USER", "ADMIN")
-        		.build();
-
-    	users.add(user);
-
-        return new InMemoryUserDetailsManager(users);
-    }
-    */
     
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
